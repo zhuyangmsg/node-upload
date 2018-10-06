@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>上传图片</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+            点击头像上传照片：
+            <form id="fromUpload" method="post" action="http://localhost:8888/uploadFile" enctype="multipart/form-data">
+                <input id="upload" type="file" name="file" value="upload" hidden />
+                <div class="upload" onclick="upload()">
+                  
+                </div>
+                <input type="submit" name="submit" value="submit" />              
+            </form>
+        </div>
+        <script>
+           $(document).ready(function(){
+                $.ajax({ 
+                    type: 'post',
+                    url: 'http://localhost:8888/upload/play',
+                    success: function(data){
+                        console.log("data",data);
+                        var uploadImg = '<img src=http://'+data.image+' />';
+                        $(".upload").html(uploadImg);
+                    }}
+                );
+            })
+           function upload(){
+                $("#upload").trigger("click");
+           }
+        </script>
+    </body>
+</html>
+ 
